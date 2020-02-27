@@ -1,4 +1,5 @@
 export default class PreloadScene extends Phaser.Scene {
+  powerUps: Phaser.Physics.Arcade.Group;
   constructor() {
     super({ key: 'PreloadScene' });
   }
@@ -22,9 +23,89 @@ export default class PreloadScene extends Phaser.Scene {
       frameWidth : 16,
       frameHeight : 16
     })
+    this.load.spritesheet("power-up", "assets/power-up.png", {
+      frameWidth : 16,
+      frameHeight : 16
+    })
+    this.load.spritesheet("player", "assets/player.png", {
+      frameWidth : 16,
+      frameHeight : 24
+    })
+    this.load.spritesheet("beam", "assets/beam.png", {
+      frameWidth : 16,
+      frameHeight : 16
+    })
   }
 
   create() {
     this.scene.start('MainScene');
+    this.anims.create({
+      key : "ship1_anim",
+      frames : this.anims.generateFrameNumbers("ship", {start : 0, end : 1}),
+      frameRate : 20,
+      repeat : -1
+    })
+    this.anims.create({
+      key : "ship2_anim",
+      frames : this.anims.generateFrameNumbers("ship2", {start : 0, end : 1}),
+      frameRate : 20,
+      repeat : -1
+    })
+    this.anims.create({
+      key : "ship3_anim",
+      frames : this.anims.generateFrameNumbers("ship3", {start : 0, end : 1}),
+      frameRate : 20,
+      repeat : -1
+    })
+    this.anims.create({
+      key : "explode",
+      frames : this.anims.generateFrameNumbers("explosion", {start : 0, end : 4}),
+      frameRate : 20,
+      repeat : 0,
+      hideOnComplete : true
+    })
+    this.anims.create({
+      key : "red",
+      frames : this.anims.generateFrameNumbers("power-up", {start : 0, end : 1}),
+      frameRate : 20,
+      repeat : -1
+    })
+    this.anims.create({
+      key : "gray",
+      frames : this.anims.generateFrameNumbers("power-up", {start : 2, end : 3}),
+      frameRate : 20,
+      repeat : -1
+    })
+    this.anims.create({
+      key : "thrust",
+      frames : this.anims.generateFrameNumbers("player", {start : 0, end : 1}),
+      frameRate : 20,
+      repeat : -1
+    })
+    this.anims.create({
+      key : "beam_anim",
+      frames : this.anims.generateFrameNumbers("beam", {start : 0, end : 1}),
+      frameRate : 20,
+      repeat : -1
+    })
+
+    this.powerUps = this.physics.add.group();
+    var maxObjects = 4;
+    for(var i = 0; i <= maxObjects; i++){
+      var powerUp = this.physics.add.sprite(16, 16, "power-up");
+      this.powerUps.add(powerUp);
+      powerUp.setRandomPosition(0, 0, this.scale.width, this.scale.height);
+
+      if(Math.random() > 0.5){
+        powerUp.play("red");
+      }
+      else{
+        powerUp.play("gray");
+      }
+
+      powerUp.setVelocity(100, 100);
+      powerUp.setCollideWorldBounds(true);
+      powerUp.setBounce(1);
+    }
   }
 }
