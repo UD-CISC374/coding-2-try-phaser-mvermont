@@ -1,8 +1,8 @@
 {
-  "name": "educational-phaser-game-template",
+  "name": "coding-2-try-phaser-mvermont",
   "version": "0.0.1",
   "description": "Phaser 3 starter template for educational games, using TypeScript, webpack, and Github Pages.",
-  "homepage": "https://github.com/acbart/educational-phaser-game-template#readme",
+  "homepage": "https://github.com/UD-CISC374/coding-2-try-phaser-mvermont",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --config config/webpack.dev.js",
@@ -26,8 +26,8 @@
     "starter"
   ],
   "author": {
-    "name": "Austin Cory Bart",
-    "url": "https://github.com/acbart"
+    "name": "Matt Vermont",
+    "url": "https://github.com/mvermont"
   },
   "repository": {
     "type": "git",
@@ -35,8 +35,8 @@
   },
   "template": {
     "name": "coding-2-try-phaser-mvermont",
-    "url": "https://github.com/acbart/educational-phaser-game-template",
-    "author": "Austin Cory Bart (https://github.com/acbart)"
+    "url": "https://github.com/UD-CISC374/coding-2-try-phaser-mvermont",
+    "author": "Matt Vermont (https://github.com/mvermont)"
   },
   "engines": {
     "node": ">=8.0.0"
