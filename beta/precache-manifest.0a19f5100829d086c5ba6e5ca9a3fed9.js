@@ -48,6 +48,14 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coding-2-try-phaser-mvermont/betagen.vendors.bbe9474c65e057812275.bundle.js"
   },
   {
+    "revision": "f3b1ff567a0c4b624e7965e2068a8ff5",
+    "url": "/coding-2-try-phaser-mvermont/betaicons/icons-192.png"
+  },
+  {
+    "revision": "940dadf1b7379fa02e546441b85f487a",
+    "url": "/coding-2-try-phaser-mvermont/betaicons/icons-512.png"
+  },
+  {
     "revision": "c2683483a2a66f8569314438283a3e30",
     "url": "/coding-2-try-phaser-mvermont/betaindex.html"
   },
