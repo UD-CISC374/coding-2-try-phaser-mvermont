@@ -3,13 +3,13 @@ import { Cameras } from 'phaser';
 import { gameSettings} from '../game';
 
 export default class MainScene extends Phaser.Scene {
-  private exampleObject: ExampleObject;
+  //private exampleObject: ExampleObject;
   background: Phaser.GameObjects.TileSprite;
   ship1: Phaser.GameObjects.Sprite;
   ship2: Phaser.GameObjects.Sprite;
   ship3: Phaser.GameObjects.Sprite;
   player: Phaser.Physics.Arcade.Sprite;
-  myCam: any;
+  myCam: Phaser.Cameras.Scene2D.Camera;
   cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
   spacebar: Phaser.Input.Keyboard.Key;
   projectiles: Phaser.GameObjects.Group;
@@ -21,28 +21,50 @@ export default class MainScene extends Phaser.Scene {
   }
 
   create() {
+
+    //Set up background
     this.background = this.add.tileSprite(0, 0, this.scale.width, this.scale.height, "background");
     this.background.setOrigin(0, 0);
     this.background.setScrollFactor(0);
-    this.background.x = this.scale.width / 2;
-    this.background.y = this.scale.height / 2;
+    //this.background.x = this.scale.width / 2;
+    //this.background.y = this.scale.height / 2;
 
-    this.ship1 = this.add.sprite(this.scale.width / 2 - 50, this.scale.height / 2, "ship");
-    this.ship2 = this.add.sprite(this.scale.width / 2, this.scale.height / 2, "ship2");
-    this.ship3 = this.add.sprite(this.scale.width / 2 + 50, this.scale.height / 2, "ship3");
-    this.enemies = this.physics.add.group();
-    this.enemies.add(this.ship1);
-    this.enemies.add(this.ship2);
-    this.enemies.add(this.ship3);
+    /*******************************************************************************/
 
+    //Set up player and camera
     this.player = this.physics.add.sprite(this.scale.width / 2 - 8, this.scale.height - 64, "player");
     this.player.play("thrust");
     this.cursorKeys = this.input.keyboard.createCursorKeys();
     this.player.setCollideWorldBounds(true);
 
-    this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-    this.projectiles = this.add.group();
+    this.cameras.main.startFollow(this.player);
+    
 
+    /*******************************************************************************/
+
+    //Set up enemies
+    this.ship1 = this.add.sprite(this.scale.width / 2 - 50, this.scale.height / 2, "ship");
+    this.ship2 = this.add.sprite(this.scale.width / 2, this.scale.height / 2, "ship2");
+    this.ship3 = this.add.sprite(this.scale.width / 2 + 50, this.scale.height / 2, "ship3");
+    
+    this.enemies = this.physics.add.group();
+    this.enemies.add(this.ship1);
+    this.enemies.add(this.ship2);
+    this.enemies.add(this.ship3);
+
+    this.ship1.play("ship1_anim");
+    this.ship2.play("ship2_anim");
+    this.ship3.play("ship3_anim");
+
+    this.ship1.setInteractive();
+    this.ship2.setInteractive();
+    this.ship3.setInteractive();
+
+    this.input.on("gamedownobject", this.destroyShip, this);
+
+    /*******************************************************************************/
+
+    //set up power-ups
     this.powerUps = this.physics.add.group();
     var maxObjects = 4;
     for(var i = 0; i <= maxObjects; i++){
@@ -62,26 +84,36 @@ export default class MainScene extends Phaser.Scene {
       powerUp.setBounce(1);
     }
 
-    this.ship1.play("ship1_anim");
-    this.ship2.play("ship2_anim");
-    this.ship3.play("ship3_anim");
+    /*******************************************************************************/
 
-    this.ship1.setInteractive();
-    this.ship2.setInteractive();
-    this.ship3.setInteractive();
-    this.input.on("gamedownobject", this.destroyShip, this);
+    //Set up shooting 
+    this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+    this.projectiles = this.add.group();
 
-    this.cameras.main.startFollow(this.player);
-    this.background.tilePositionX = this.myCam.scrollX * 3;
-
+    /*******************************************************************************/ 
+    
+    //Set up collisions
     this.physics.add.collider(this.projectiles, this.powerUps, function(projectile, powerUp){
       projectile.destroy();
     });
-    this.physics.add.overlap(this.player, this.powerUps, this.pickPowerUp, this.giveTrue, this);
-    this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer, this.giveTrue, this);
-    this.physics.add.overlap(this.projectiles, this.enemies, this.hitEnemy, this.giveTrue, this);
+    this.physics.add.overlap(this.player, this.powerUps, this.pickPowerUp, this.giveNull, this);
+    this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer, this.giveNull, this);
+    this.physics.add.overlap(this.projectiles, this.enemies, this.hitEnemy, this.giveNull, this);
+  }
 
-    //this.exampleObject = new ExampleObject(this, 0, 0);
+  update() {
+    this.background.tilePositionX = this.myCam.scrollX * .3;
+
+    this.moveShip(this.ship1, 1);
+    this.moveShip(this.ship2, 2);
+    this.moveShip(this.ship3, 3);
+
+    this.movePlayerManager();
+
+    for(var i = 0; i < this.projectiles.getChildren().length; i++){
+      var beam = this.projectiles.getChildren()[i];
+      beam.update();
+    }
   }
 
   pickPowerUp(player, powerUp){
@@ -117,25 +149,8 @@ export default class MainScene extends Phaser.Scene {
     gameObject.play("explode");
   }
 
-  giveTrue(){
-    return true;
-  }
-
-  update() {
-    this.moveShip(this.ship1, 1);
-    this.moveShip(this.ship2, 2);
-    this.moveShip(this.ship3, 3);
-
-    this.movePlayerManager();
-
-    if(Phaser.Input.Keyboard.JustDown(this.spacebar)){
-      this.shootBeam();
-    }
-
-    for(var i = 0; i < this.projectiles.getChildren().length; i++){
-      var beam = this.projectiles.getChildren()[i];
-      beam.update();
-    }
+  giveNull(){
+    return null;
   }
 
   shootBeam(){
@@ -155,6 +170,9 @@ export default class MainScene extends Phaser.Scene {
     }
     else if(this.cursorKeys.down?.isDown){
       this.player.setVelocityY(gameSettings.playerSpeed);
+    }
+    if(Phaser.Input.Keyboard.JustDown(this.spacebar)){
+      this.shootBeam();
     }
   }
 }
