@@ -33,7 +33,7 @@ export default class MainScene extends Phaser.Scene {
 
     //Set up player and camera
     this.player = this.physics.add.sprite(this.scale.width / 2 - 8, this.scale.height - 64, "player");
-    this.player.play("thrust");
+    //this.player.play("thrust");
     this.cursorKeys = this.input.keyboard.createCursorKeys();
     this.player.setCollideWorldBounds(true);
 
@@ -52,9 +52,9 @@ export default class MainScene extends Phaser.Scene {
     this.enemies.add(this.ship2);
     this.enemies.add(this.ship3);
 
-    this.ship1.play("ship1_anim");
-    this.ship2.play("ship2_anim");
-    this.ship3.play("ship3_anim");
+    //this.ship1.play("ship1_anim");
+    //this.ship2.play("ship2_anim");
+    //this.ship3.play("ship3_anim");
 
     this.ship1.setInteractive();
     this.ship2.setInteractive();
@@ -73,10 +73,10 @@ export default class MainScene extends Phaser.Scene {
       powerUp.setRandomPosition(0, 0, this.scale.width, this.scale.height);
 
       if(Math.random() > 0.5){
-        powerUp.play("red");
+        //powerUp.play("red");
       }
       else{
-        powerUp.play("gray");
+        //powerUp.play("gray");
       }
 
       powerUp.setVelocity(100, 100);
@@ -146,7 +146,7 @@ export default class MainScene extends Phaser.Scene {
 
   destroyShip(pointer, gameObject){
     gameObject.setTexture("explosion");
-    gameObject.play("explode");
+    //gameObject.play("explode");
   }
 
   giveNull(){
