@@ -1,5 +1,5 @@
 export default class PreloadScene extends Phaser.Scene {
-  powerUps: Phaser.Physics.Arcade.Group;
+  
   constructor() {
     super({ key: 'PreloadScene' });
   }
@@ -88,24 +88,5 @@ export default class PreloadScene extends Phaser.Scene {
       frameRate : 20,
       repeat : -1
     })
-
-    this.powerUps = this.physics.add.group();
-    var maxObjects = 4;
-    for(var i = 0; i <= maxObjects; i++){
-      var powerUp = this.physics.add.sprite(16, 16, "power-up");
-      this.powerUps.add(powerUp);
-      powerUp.setRandomPosition(0, 0, this.scale.width, this.scale.height);
-
-      if(Math.random() > 0.5){
-        powerUp.play("red");
-      }
-      else{
-        powerUp.play("gray");
-      }
-
-      powerUp.setVelocity(100, 100);
-      powerUp.setCollideWorldBounds(true);
-      powerUp.setBounce(1);
-    }
   }
 }
