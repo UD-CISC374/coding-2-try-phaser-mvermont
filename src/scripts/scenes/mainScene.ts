@@ -1,6 +1,6 @@
 import ExampleObject from '../objects/exampleObject';
-import { Cameras } from 'phaser';
 import { gameSettings} from '../game';
+import Beam from "../objects/beam";
 
 export default class MainScene extends Phaser.Scene {
   //private exampleObject: ExampleObject;
@@ -111,8 +111,8 @@ export default class MainScene extends Phaser.Scene {
     this.movePlayerManager();
 
     for(var i = 0; i < this.projectiles.getChildren().length; i++){
-      var beam = this.projectiles.getChildren()[i];
-      beam.update();
+      let beam = this.projectiles.getChildren()[i];
+      beam.update(this);
     }
   }
 
@@ -154,7 +154,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   shootBeam(){
-    var beam = new Beam(this);
+    let beam = new Beam(this);
   }
 
   movePlayerManager(){
