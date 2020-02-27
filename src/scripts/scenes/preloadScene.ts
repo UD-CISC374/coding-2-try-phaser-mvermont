@@ -78,7 +78,7 @@ export default class PreloadScene extends Phaser.Scene {
     })
     this.anims.create({
       key : "thrust",
-      frames : this.anims.generateFrameNumbers("player", {start : 0, end : 1}),
+      frames : this.anims.generateFrameNumbers("player", {start : 0, end : 2}),
       frameRate : 20,
       repeat : -1
     })

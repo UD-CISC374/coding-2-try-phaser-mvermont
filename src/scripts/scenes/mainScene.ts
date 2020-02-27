@@ -68,7 +68,7 @@ export default class MainScene extends Phaser.Scene {
     this.powerUps = this.physics.add.group();
     var maxObjects = 4;
     for(var i = 0; i <= maxObjects; i++){
-      var powerUp = this.physics.add.sprite(16, 16, "power-up");
+      let powerUp = this.physics.add.sprite(16, 16, "power-up");
       this.powerUps.add(powerUp);
       powerUp.setRandomPosition(0, 0, this.scale.width, this.scale.height);
 
