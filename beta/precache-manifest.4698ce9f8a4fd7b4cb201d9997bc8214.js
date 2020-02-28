@@ -1,7 +1,7 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "9fd0dcea47820063efe7dabd12e32b87",
-    "url": "/coding-2-try-phaser-mvermont/betaassets/background.png"
+    "revision": "a8a7824ac7893230fe6b4007c09aae57",
+    "url": "/coding-2-try-phaser-mvermont/betaassets/background.jpg"
   },
   {
     "revision": "6be3462bcaa4a183b678800bb66d176c",
@@ -40,8 +40,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coding-2-try-phaser-mvermont/betafavicon.ico"
   },
   {
-    "revision": "83fd5fe6c67738e54e59",
-    "url": "/coding-2-try-phaser-mvermont/betagen.main.20cb0d864fd7ce1f0c62.bundle.js"
+    "revision": "ffa4bd7efb1795aecc36",
+    "url": "/coding-2-try-phaser-mvermont/betagen.main.7b151a0d2e5e05d5e1df.bundle.js"
   },
   {
     "revision": "7e3abc0967d71642756e",
@@ -56,7 +56,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coding-2-try-phaser-mvermont/betaicons/icons-512.png"
   },
   {
-    "revision": "200140a22031aa589adab8e56011138b",
+    "revision": "c494a12195e3efca61f45d149b80f0db",
     "url": "/coding-2-try-phaser-mvermont/betaindex.html"
   },
   {
