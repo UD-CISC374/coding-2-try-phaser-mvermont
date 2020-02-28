@@ -3,9 +3,9 @@ import Beam from "../objects/beam";
 
 export default class MainScene extends Phaser.Scene {
   background: Phaser.GameObjects.TileSprite;
-  ship1: Phaser.GameObjects.Sprite;
-  ship2: Phaser.GameObjects.Sprite;
-  ship3: Phaser.GameObjects.Sprite;
+  //ship1: Phaser.GameObjects.Sprite;
+  //ship2: Phaser.GameObjects.Sprite;
+  //ship3: Phaser.GameObjects.Sprite;
   player: Phaser.Physics.Arcade.Sprite;
   cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
   spacebar: Phaser.Input.Keyboard.Key;
@@ -25,7 +25,7 @@ export default class MainScene extends Phaser.Scene {
 
     /*******************************************************************************/
 
-    //Set up player and camera
+    //Set up player
     this.player = this.physics.add.sprite(this.scale.width / 2, this.scale.height - 32, "player");
     this.player.play("thrust");
     this.cursorKeys = this.input.keyboard.createCursorKeys();
@@ -35,34 +35,36 @@ export default class MainScene extends Phaser.Scene {
 
     //Set up enemies
     this.enemies = this.physics.add.group();
-    let xCounter = 30;
-    for(let i = 0; i < 18; i++){
-      let ship = this.physics.add.sprite(xCounter, 50, "ship1");
+    let xCounter = 60;
+    for(let i = 0; i < 5; i++){
+      let ship = this.physics.add.sprite(xCounter, 60, "ship3");
       this.enemies.add(ship);
-      xCounter += 20;
-      ship.play("ship1_anim");
+      xCounter += 70;
+      ship.play("ship3_anim");
       ship.setInteractive();
+      ship.setScale(2);
     }
-    xCounter = 30;
-    for(let i = this.enemies.getChildren().length; i < this.enemies.getChildren().length+9; i++){
-      let ship = this.physics.add.sprite(xCounter, 70, "ship2");
+    xCounter = 40;
+    for(let i = 0; i < 9; i++){
+      let ship = this.physics.add.sprite(xCounter, 120, "ship2");
       this.enemies.add(ship);
       xCounter += 40;
       ship.play("ship2_anim");
       ship.setInteractive();
     }
-
+    xCounter = 30;
+    for(let i = 0; i < 18; i++){
+      let shipA = this.physics.add.sprite(xCounter, 150, "ship1");
+      let shipB = this.physics.add.sprite(xCounter, 180, "ship1");
+      this.enemies.add(shipA);
+      this.enemies.add(shipB);
+      xCounter += 20;
+      shipA.play("ship1_anim");
+      shipB.play("ship1_anim");
+      shipA.setInteractive();
+      shipB.setInteractive();
+    }
     
-    this.ship3 = this.add.sprite(this.scale.width / 2 + 50, this.scale.height / 2, "ship3");
-    
-    
-    this.enemies.add(this.ship3);
-
-    
-    this.ship3.play("ship3_anim");
-
-    this.ship3.setInteractive();
-
     this.input.on("gamedownobject", this.destroyShip, this);
 
     /*******************************************************************************/
