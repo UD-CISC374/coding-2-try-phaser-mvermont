@@ -1,5 +1,6 @@
 import { gameSettings} from '../game';
 import Beam from "../objects/beam";
+import Explosion from '../objects/explosion';
 
 export default class MainScene extends Phaser.Scene {
   background: Phaser.GameObjects.TileSprite;
@@ -14,6 +15,7 @@ export default class MainScene extends Phaser.Scene {
   enemies: Phaser.Physics.Arcade.Group;
   scoreLabel: Phaser.GameObjects.BitmapText;
   score: number;
+  enemyMove: any;
 
   constructor() {
     super({ key: 'MainScene' });
@@ -25,15 +27,17 @@ export default class MainScene extends Phaser.Scene {
     this.background = this.add.tileSprite(0, 0, this.scale.width, this.scale.height, "background");
     this.background.setOrigin(0, 0);
     this.score = 0;
-    this.scoreLabel = this.add.bitmapText(10, 5, "newPixel", "Score: ", 15);
+    this.scoreLabel = this.add.bitmapText(10, 5, "pixelFont", "SCORE: ", 15);
+    this.add.text(this.scale.width / 2 - 35, 5, "GALAGA", {
+      fill : "yellow",
+    });
 
     /*******************************************************************************/
 
     //Set up player
     this.player = this.physics.add.sprite(this.scale.width / 2, this.scale.height - 32, "player");
     this.player.play("thrust");
-    this.cursorKeys = this.input.keyboard.createCursorKeys();
-    //this.player.setCollideWorldBounds(true);    
+    this.cursorKeys = this.input.keyboard.createCursorKeys();   
 
     /*******************************************************************************/
 
@@ -68,6 +72,7 @@ export default class MainScene extends Phaser.Scene {
       shipA.setInteractive();
       shipB.setInteractive();
     }
+    this.enemyMove = 0.25;
     
     this.input.on("gamedownobject", this.destroyShip, this);
 
@@ -106,7 +111,7 @@ export default class MainScene extends Phaser.Scene {
       projectile.destroy();
     });
     this.physics.add.overlap(this.player, this.powerUps, this.pickPowerUp, this.giveNull, this);*/
-    this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer, this.giveNull, this);
+    this.physics.add.overlap(this.player, this.enemies, this.killPlayer, this.giveNull, this);
     this.physics.add.overlap(this.projectiles, this.enemies, this.hitEnemy, this.giveNull, this);
   }
 
@@ -114,9 +119,9 @@ export default class MainScene extends Phaser.Scene {
     this.player.setVelocity(0);
 
     for(let i = 0; i < this.enemies.getChildren().length; i++){
-      this.moveShip(this.enemies.getChildren()[i], 0.15);
+      this.moveShip(this.enemies.getChildren()[i], this.enemyMove);
       let ship = this.getShip(this.enemies.getChildren()[i]);
-      if(ship.y <= this.player.y){
+      if(ship.y >= this.player.y){
         this.endGame(false);
       }
     }
@@ -128,7 +133,7 @@ export default class MainScene extends Phaser.Scene {
       beam.update(this);
     }
 
-    if(this.enemies.getChildren().length == 0){
+    if(this.score == 750){
       this.endGame(true);
     }
   }
@@ -137,28 +142,27 @@ export default class MainScene extends Phaser.Scene {
     powerUp.disableBody(true, true);
   }*/
 
-  hurtPlayer(player, enemy){
-    this.resetShipPos(enemy);
-    player.x = this.scale.width / 2 - 8;
-    player.y = this.scale.height - 64;
-  }
-
   hitEnemy(projectile, enemy){
+    let explosion = new Explosion(this, enemy.x, enemy.y);
     projectile.destroy();
     enemy.destroy();
     this.score += 15;
     this.scoreLabel.text = "SCORE: " + this.score;
   }
 
+  killPlayer(){
+    this.endGame(false);
+  }
+
   moveShip(ship, speed){
     ship.y += speed;
   }
 
-  resetShipPos(ship){
+  /*resetShipPos(ship){
     ship.y = 0;
     var randomX = Phaser.Math.Between(0, this.scale.width);
     ship.x = randomX;
-  }
+  }*/
 
   destroyShip(pointer, gameObject){
     gameObject.setTexture("explosion");
@@ -195,15 +199,26 @@ export default class MainScene extends Phaser.Scene {
       this.player.setVelocityY(gameSettings.playerSpeed);
     }*/
     if(Phaser.Input.Keyboard.JustDown(this.spacebar)){
-      this.shootBeam();
+      if(this.player.active){
+        this.shootBeam();
+      }
     }
   }
   endGame(didWin){
     if(didWin){
-
+      this.add.text(this.scale.width / 2 - 65, this.scale.height / 2 - 30, "YOU WIN", {
+        fill : "green",
+        fontSize : 30
+      });
     }
     else{
-
+      let explosion = new Explosion(this, this.player.x, this.player.y);
+      this.player.disableBody(true, true);
+      this.enemyMove = 0;
+      this.add.text(this.scale.width / 2 - 65, this.scale.height / 2 - 30, "YOU LOSE", {
+        fill : "red",
+        fontSize : 30
+      });
     }
   }
 }
