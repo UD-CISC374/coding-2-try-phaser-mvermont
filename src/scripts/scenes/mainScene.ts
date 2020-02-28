@@ -35,27 +35,32 @@ export default class MainScene extends Phaser.Scene {
 
     //Set up enemies
     this.enemies = this.physics.add.group();
-    let xCounter = 40;
-    for(let i = 0; i < 10; i++){
+    let xCounter = 30;
+    for(let i = 0; i < 18; i++){
       let ship = this.physics.add.sprite(xCounter, 50, "ship1");
       this.enemies.add(ship);
       xCounter += 20;
       ship.play("ship1_anim");
       ship.setInteractive();
     }
+    xCounter = 30;
+    for(let i = this.enemies.getChildren().length; i < this.enemies.getChildren().length+9; i++){
+      let ship = this.physics.add.sprite(xCounter, 70, "ship2");
+      this.enemies.add(ship);
+      xCounter += 40;
+      ship.play("ship2_anim");
+      ship.setInteractive();
+    }
+
     
-    this.ship2 = this.add.sprite(this.scale.width / 2, this.scale.height / 2, "ship2");
     this.ship3 = this.add.sprite(this.scale.width / 2 + 50, this.scale.height / 2, "ship3");
     
     
-    this.enemies.add(this.ship2);
     this.enemies.add(this.ship3);
 
     
-    this.ship2.play("ship2_anim");
     this.ship3.play("ship3_anim");
 
-    this.ship2.setInteractive();
     this.ship3.setInteractive();
 
     this.input.on("gamedownobject", this.destroyShip, this);
