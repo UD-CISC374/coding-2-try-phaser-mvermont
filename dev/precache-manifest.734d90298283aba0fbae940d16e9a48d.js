@@ -48,8 +48,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coding-2-try-phaser-mvermont/devfavicon.ico"
   },
   {
-    "revision": "63b429775664520537fc",
-    "url": "/coding-2-try-phaser-mvermont/devgen.main.48c3dd2b738405e040bd.bundle.js"
+    "revision": "2e2fe3cccefb53df3319",
+    "url": "/coding-2-try-phaser-mvermont/devgen.main.f086e5235b75d4ed6b6b.bundle.js"
   },
   {
     "revision": "7e3abc0967d71642756e",
@@ -64,7 +64,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coding-2-try-phaser-mvermont/devicons/icons-512.png"
   },
   {
-    "revision": "6b44a844c5a383afe720c5d8c16b665a",
+    "revision": "dd890a121f09aaed74891bea19426ffd",
     "url": "/coding-2-try-phaser-mvermont/devindex.html"
   },
   {
