@@ -40,8 +40,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coding-2-try-phaser-mvermont/alphafavicon.ico"
   },
   {
-    "revision": "b40f32836a76ecd7ce2f",
-    "url": "/coding-2-try-phaser-mvermont/alphagen.main.67d0f148f05bbe820803.bundle.js"
+    "revision": "18ec9b89e95ebf142b9c",
+    "url": "/coding-2-try-phaser-mvermont/alphagen.main.00dc2989f9e2a35e50e2.bundle.js"
   },
   {
     "revision": "7e3abc0967d71642756e",
@@ -56,7 +56,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coding-2-try-phaser-mvermont/alphaicons/icons-512.png"
   },
   {
-    "revision": "d521804a1a6ec8d81ebe0a09f3bdaedb",
+    "revision": "83d7690057e6a1fe03a98c9aeee20297",
     "url": "/coding-2-try-phaser-mvermont/alphaindex.html"
   },
   {
