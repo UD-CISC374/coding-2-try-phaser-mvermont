@@ -15,7 +15,7 @@ export default class Beam extends Phaser.GameObjects.Sprite{
     }
 
     update(){
-        if(this.y < 32){
+        if(this.y < 10){
             this.destroy();
         }
     }

@@ -29,17 +29,28 @@ export default class MainScene extends Phaser.Scene {
     this.player = this.physics.add.sprite(this.scale.width / 2, this.scale.height - 32, "player");
     this.player.play("thrust");
     this.cursorKeys = this.input.keyboard.createCursorKeys();
-    this.player.setCollideWorldBounds(true);    
+    //this.player.setCollideWorldBounds(true);    
 
     /*******************************************************************************/
 
     //Set up enemies
-    this.ship1 = this.add.sprite(this.scale.width / 2 - 50, this.scale.height / 2, "ship1");
+    this.enemies = this.physics.add.group();
+    for(let i = 0; i < 10; i++){
+      let ship = this.physics.add.sprite(16, 16, "ship1");
+      this.enemies.add(ship);
+    }
+    let firstShip = this.enemies.getChildren[0];
+    firstShip.setOrigin(40, 50);
+    for(let i = 1; i <= this.enemies.getChildren().length; i++){
+      let prevShip = this.enemies.getChildren[i-1];
+      let currShip = this.enemies.getChildren[i];
+      currShip.setOrigin(prevShip.x + 20, prevShip.y);
+    }
+    
     this.ship2 = this.add.sprite(this.scale.width / 2, this.scale.height / 2, "ship2");
     this.ship3 = this.add.sprite(this.scale.width / 2 + 50, this.scale.height / 2, "ship3");
     
-    this.enemies = this.physics.add.group();
-    this.enemies.add(this.ship1);
+    
     this.enemies.add(this.ship2);
     this.enemies.add(this.ship3);
 
@@ -115,7 +126,7 @@ export default class MainScene extends Phaser.Scene {
 
   hitEnemy(projectile, enemy){
     projectile.destroy();
-    this.resetShipPos(enemy);
+    enemy.destroy();
   }
 
   moveShip(ship, speed){
