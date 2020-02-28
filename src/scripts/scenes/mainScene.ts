@@ -41,7 +41,7 @@ export default class MainScene extends Phaser.Scene {
     /*******************************************************************************/
 
     //Set up enemies
-    this.ship1 = this.add.sprite(this.scale.width / 2 - 50, this.scale.height / 2, "ship");
+    this.ship1 = this.add.sprite(this.scale.width / 2 - 50, this.scale.height / 2, "ship1");
     this.ship2 = this.add.sprite(this.scale.width / 2, this.scale.height / 2, "ship2");
     this.ship3 = this.add.sprite(this.scale.width / 2 + 50, this.scale.height / 2, "ship3");
     
@@ -50,7 +50,7 @@ export default class MainScene extends Phaser.Scene {
     this.enemies.add(this.ship2);
     this.enemies.add(this.ship3);
 
-    //this.ship1.play("ship1_anim");
+    this.ship1.play("ship1_anim");
     this.ship2.play("ship2_anim");
     this.ship3.play("ship3_anim");
 

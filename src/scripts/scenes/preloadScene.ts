@@ -41,7 +41,7 @@ export default class PreloadScene extends Phaser.Scene {
     this.scene.start('MainScene');
     this.anims.create({
       key : "ship1_anim",
-      frames : this.anims.generateFrameNumbers("ship", {start : 0, end : 1}),
+      frames : this.anims.generateFrameNumbers("ship1", {start : 0, end : 1}),
       frameRate : 20,
       repeat : -1
     })
