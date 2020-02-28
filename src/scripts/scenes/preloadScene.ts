@@ -35,6 +35,7 @@ export default class PreloadScene extends Phaser.Scene {
       frameWidth : 16,
       frameHeight : 16
     })
+    this.load.bitmapFont("pixelFont", "assets/fonts/font.png", "assets/fonts/font.xml");
   }
 
   create() {

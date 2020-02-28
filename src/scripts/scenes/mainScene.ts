@@ -12,6 +12,8 @@ export default class MainScene extends Phaser.Scene {
   projectiles: Phaser.GameObjects.Group;
   //powerUps: Phaser.Physics.Arcade.Group;  //No power-ups in galaga
   enemies: Phaser.Physics.Arcade.Group;
+  scoreLabel: Phaser.GameObjects.BitmapText;
+  score: number;
 
   constructor() {
     super({ key: 'MainScene' });
@@ -22,6 +24,8 @@ export default class MainScene extends Phaser.Scene {
     //Set up background
     this.background = this.add.tileSprite(0, 0, this.scale.width, this.scale.height, "background");
     this.background.setOrigin(0, 0);
+    this.score = 0;
+    this.scoreLabel = this.add.bitmapText(10, 5, "newPixel", "Score: ", 15);
 
     /*******************************************************************************/
 
@@ -109,11 +113,23 @@ export default class MainScene extends Phaser.Scene {
   update() {
     this.player.setVelocity(0);
 
+    for(let i = 0; i < this.enemies.getChildren().length; i++){
+      this.moveShip(this.enemies.getChildren()[i], 0.15);
+      let ship = this.getShip(this.enemies.getChildren()[i]);
+      if(ship.y <= this.player.y){
+        this.endGame(false);
+      }
+    }
+
     this.movePlayerManager();
 
     for(var i = 0; i < this.projectiles.getChildren().length; i++){
       let beam = this.projectiles.getChildren()[i];
       beam.update(this);
+    }
+
+    if(this.enemies.getChildren().length == 0){
+      this.endGame(true);
     }
   }
 
@@ -130,13 +146,12 @@ export default class MainScene extends Phaser.Scene {
   hitEnemy(projectile, enemy){
     projectile.destroy();
     enemy.destroy();
+    this.score += 15;
+    this.scoreLabel.text = "SCORE: " + this.score;
   }
 
   moveShip(ship, speed){
     ship.y += speed;
-    if(ship.y > this.scale.height){
-      this.resetShipPos(ship);
-    }
   }
 
   resetShipPos(ship){
@@ -158,14 +173,21 @@ export default class MainScene extends Phaser.Scene {
     let beam = new Beam(this);
   }
 
+  getShip(ship){
+    return ship;
+  }
+
   movePlayerManager(){
-    if(this.cursorKeys.left?.isDown){
-      this.player.setVelocityX(-gameSettings.playerSpeed);
+    if(this.cursorKeys.left?.isDown ){
+      if(this.player.x >= 10){
+        this.player.setVelocityX(-gameSettings.playerSpeed);
+      }
     }
     else if(this.cursorKeys.right?.isDown){
-      this.player.setVelocityX(gameSettings.playerSpeed);
+      if(this.player.x <= this.scale.width-10){
+        this.player.setVelocityX(gameSettings.playerSpeed);
+      }
     }
-
     /*if(this.cursorKeys.up?.isDown){
       this.player.setVelocityY(-gameSettings.playerSpeed);
     }
@@ -174,6 +196,14 @@ export default class MainScene extends Phaser.Scene {
     }*/
     if(Phaser.Input.Keyboard.JustDown(this.spacebar)){
       this.shootBeam();
+    }
+  }
+  endGame(didWin){
+    if(didWin){
+
+    }
+    else{
+
     }
   }
 }
