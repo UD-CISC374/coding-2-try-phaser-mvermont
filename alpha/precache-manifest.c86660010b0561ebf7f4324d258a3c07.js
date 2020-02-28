@@ -1,7 +1,7 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "9fd0dcea47820063efe7dabd12e32b87",
-    "url": "/coding-2-try-phaser-mvermont/alphaassets/background.png"
+    "revision": "a8a7824ac7893230fe6b4007c09aae57",
+    "url": "/coding-2-try-phaser-mvermont/alphaassets/background.jpg"
   },
   {
     "revision": "6be3462bcaa4a183b678800bb66d176c",
@@ -40,8 +40,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coding-2-try-phaser-mvermont/alphafavicon.ico"
   },
   {
-    "revision": "6bef0394f5d6a37878f8",
-    "url": "/coding-2-try-phaser-mvermont/alphagen.main.74d24ae0021c8e27a647.bundle.js"
+    "revision": "573a84a294bfd2d764cb",
+    "url": "/coding-2-try-phaser-mvermont/alphagen.main.c46d4ba2557fd5536565.bundle.js"
   },
   {
     "revision": "7e3abc0967d71642756e",
@@ -56,7 +56,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coding-2-try-phaser-mvermont/alphaicons/icons-512.png"
   },
   {
-    "revision": "993abd410535a9697dc1f6a0b154aa43",
+    "revision": "b3d56e19f211cf3f73f77dd3d989e463",
     "url": "/coding-2-try-phaser-mvermont/alphaindex.html"
   },
   {
