@@ -35,16 +35,11 @@ export default class MainScene extends Phaser.Scene {
 
     //Set up enemies
     this.enemies = this.physics.add.group();
+    let xCounter = 40;
     for(let i = 0; i < 10; i++){
-      let ship = this.physics.add.sprite(40, 50, "ship1");
+      let ship = this.physics.add.sprite(xCounter, 50, "ship1");
       this.enemies.add(ship);
-    }
-    let firstShip = this.enemies.getChildren[0];
-    for(let i = 1; i <= this.enemies.getChildren().length; i++){
-      let prevShip = this.enemies.getChildren[i-1];
-      let currShip = this.enemies.getChildren[i];
-      currShip.x = prevShip.x + 20;
-      currShip.y = prevShip.y;
+      xCounter += 20;
     }
     
     this.ship2 = this.add.sprite(this.scale.width / 2, this.scale.height / 2, "ship2");
