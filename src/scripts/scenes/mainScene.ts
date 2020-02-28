@@ -72,7 +72,7 @@ export default class MainScene extends Phaser.Scene {
       shipA.setInteractive();
       shipB.setInteractive();
     }
-    this.enemyMovement = 0.22;
+    this.enemyMovement = 0.20;
     
     this.input.on("gamedownobject", this.destroyShip, this);
 
