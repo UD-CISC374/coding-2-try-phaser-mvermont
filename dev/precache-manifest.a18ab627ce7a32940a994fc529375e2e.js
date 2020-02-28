@@ -16,6 +16,14 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coding-2-try-phaser-mvermont/devassets/explosion.png"
   },
   {
+    "revision": "9d79a2ec01455afa082d23e42f457801",
+    "url": "/coding-2-try-phaser-mvermont/devassets/fonts/font.png"
+  },
+  {
+    "revision": "872f41e77eae3bfc4fba291b0145b12a",
+    "url": "/coding-2-try-phaser-mvermont/devassets/fonts/font.xml"
+  },
+  {
     "revision": "ff70e55fbb2b70941d98b3e7ab1a01aa",
     "url": "/coding-2-try-phaser-mvermont/devassets/player.png"
   },
@@ -40,8 +48,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coding-2-try-phaser-mvermont/devfavicon.ico"
   },
   {
-    "revision": "caa5b9a6cc562e1e8161",
-    "url": "/coding-2-try-phaser-mvermont/devgen.main.134a460f87071bb440f4.bundle.js"
+    "revision": "e8cb87d0eb059327086e",
+    "url": "/coding-2-try-phaser-mvermont/devgen.main.766284a46175b6ca6e56.bundle.js"
   },
   {
     "revision": "7e3abc0967d71642756e",
@@ -56,7 +64,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coding-2-try-phaser-mvermont/devicons/icons-512.png"
   },
   {
-    "revision": "941446f69759363797f493a06a00c47a",
+    "revision": "5b55acdec499d41231b67b23c6fe09d1",
     "url": "/coding-2-try-phaser-mvermont/devindex.html"
   },
   {
