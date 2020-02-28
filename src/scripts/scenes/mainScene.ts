@@ -15,7 +15,7 @@ export default class MainScene extends Phaser.Scene {
   enemies: Phaser.Physics.Arcade.Group;
   scoreLabel: Phaser.GameObjects.BitmapText;
   score: number;
-  enemyMove: any;
+  enemyMovement: any;
 
   constructor() {
     super({ key: 'MainScene' });
@@ -72,7 +72,7 @@ export default class MainScene extends Phaser.Scene {
       shipA.setInteractive();
       shipB.setInteractive();
     }
-    this.enemyMove = 0.25;
+    this.enemyMovement = 0.22;
     
     this.input.on("gamedownobject", this.destroyShip, this);
 
@@ -119,7 +119,7 @@ export default class MainScene extends Phaser.Scene {
     this.player.setVelocity(0);
 
     for(let i = 0; i < this.enemies.getChildren().length; i++){
-      this.moveShip(this.enemies.getChildren()[i], this.enemyMove);
+      this.moveShip(this.enemies.getChildren()[i], this.enemyMovement);
       let ship = this.getShip(this.enemies.getChildren()[i]);
       if(ship.y >= this.player.y){
         this.endGame(false);
@@ -214,7 +214,7 @@ export default class MainScene extends Phaser.Scene {
     else{
       let explosion = new Explosion(this, this.player.x, this.player.y);
       this.player.disableBody(true, true);
-      this.enemyMove = 0;
+      this.enemyMovement = 0;
       this.add.text(this.scale.width / 2 - 65, this.scale.height / 2 - 30, "YOU LOSE", {
         fill : "red",
         fontSize : 30
