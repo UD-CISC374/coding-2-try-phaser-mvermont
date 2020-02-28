@@ -40,6 +40,8 @@ export default class MainScene extends Phaser.Scene {
       let ship = this.physics.add.sprite(xCounter, 50, "ship1");
       this.enemies.add(ship);
       xCounter += 20;
+      ship.play("ship1_anim");
+      ship.setInteractive();
     }
     
     this.ship2 = this.add.sprite(this.scale.width / 2, this.scale.height / 2, "ship2");
@@ -49,11 +51,10 @@ export default class MainScene extends Phaser.Scene {
     this.enemies.add(this.ship2);
     this.enemies.add(this.ship3);
 
-    this.ship1.play("ship1_anim");
+    
     this.ship2.play("ship2_anim");
     this.ship3.play("ship3_anim");
 
-    this.ship1.setInteractive();
     this.ship2.setInteractive();
     this.ship3.setInteractive();
 
