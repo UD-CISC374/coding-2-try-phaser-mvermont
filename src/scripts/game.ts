@@ -12,11 +12,13 @@ export const gameSettings = {
 const config: GameConfig = {
     backgroundColor: '#ffffff',
     scale: {
+        width : 256,
+        height : 272,
         parent: 'phaser-game',
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: DEFAULT_WIDTH,
-        height: DEFAULT_HEIGHT
+        //width: DEFAULT_WIDTH,
+        //height: DEFAULT_HEIGHT
     },
     scene: [PreloadScene, MainScene],
     physics: {

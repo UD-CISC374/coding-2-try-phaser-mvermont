@@ -9,7 +9,7 @@ export default class Beam extends Phaser.GameObjects.Sprite{
 
         scene.projectiles.add(this);
 
-        //this.play("beam_anim");
+        this.play("beam_anim");
         scene.physics.world.enableBody(this);
         this.body.velocity. y = -250;
     }
