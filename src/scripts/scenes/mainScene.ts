@@ -102,7 +102,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   update() {
-    this.background.tilePositionX = this.myCam.scrollX * .3;
+    //this.background.tilePositionX = this.myCam.scrollX * .3;
 
     this.moveShip(this.ship1, 1);
     this.moveShip(this.ship2, 2);
