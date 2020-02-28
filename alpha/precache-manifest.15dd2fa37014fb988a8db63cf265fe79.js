@@ -16,6 +16,14 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coding-2-try-phaser-mvermont/alphaassets/explosion.png"
   },
   {
+    "revision": "9d79a2ec01455afa082d23e42f457801",
+    "url": "/coding-2-try-phaser-mvermont/alphaassets/fonts/font.png"
+  },
+  {
+    "revision": "872f41e77eae3bfc4fba291b0145b12a",
+    "url": "/coding-2-try-phaser-mvermont/alphaassets/fonts/font.xml"
+  },
+  {
     "revision": "ff70e55fbb2b70941d98b3e7ab1a01aa",
     "url": "/coding-2-try-phaser-mvermont/alphaassets/player.png"
   },
@@ -40,8 +48,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coding-2-try-phaser-mvermont/alphafavicon.ico"
   },
   {
-    "revision": "18ec9b89e95ebf142b9c",
-    "url": "/coding-2-try-phaser-mvermont/alphagen.main.00dc2989f9e2a35e50e2.bundle.js"
+    "revision": "661a2d90be51b1906e84",
+    "url": "/coding-2-try-phaser-mvermont/alphagen.main.6ad6bd529e5aeb4c22e5.bundle.js"
   },
   {
     "revision": "7e3abc0967d71642756e",
@@ -56,7 +64,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coding-2-try-phaser-mvermont/alphaicons/icons-512.png"
   },
   {
-    "revision": "83d7690057e6a1fe03a98c9aeee20297",
+    "revision": "2bfdbf3c73605f4c85f2796f5e600ab7",
     "url": "/coding-2-try-phaser-mvermont/alphaindex.html"
   },
   {
