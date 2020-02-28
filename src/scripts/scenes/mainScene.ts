@@ -9,7 +9,7 @@ export default class MainScene extends Phaser.Scene {
   ship2: Phaser.GameObjects.Sprite;
   ship3: Phaser.GameObjects.Sprite;
   player: Phaser.Physics.Arcade.Sprite;
-  myCam: Phaser.Cameras.Scene2D.Camera;
+  //myCam: Phaser.Cameras.Scene2D.Camera;
   cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
   spacebar: Phaser.Input.Keyboard.Key;
   projectiles: Phaser.GameObjects.Group;
@@ -25,7 +25,7 @@ export default class MainScene extends Phaser.Scene {
     //Set up background
     this.background = this.add.tileSprite(0, 0, this.scale.width, this.scale.height, "background");
     this.background.setOrigin(0, 0);
-    this.background.setScrollFactor(0);
+    //this.background.setScrollFactor(0);
     //this.background.x = this.scale.width / 2;
     //this.background.y = this.scale.height / 2;
 
@@ -37,7 +37,7 @@ export default class MainScene extends Phaser.Scene {
     this.cursorKeys = this.input.keyboard.createCursorKeys();
     this.player.setCollideWorldBounds(true);
 
-    this.cameras.main.startFollow(this.player);
+    //this.cameras.main.startFollow(this.player);
     
 
     /*******************************************************************************/
