@@ -170,7 +170,7 @@ export default class MainScene extends Phaser.Scene {
     let explosion = new Explosion(this, enemy.x, enemy.y);
     projectile.destroy();
     if(this.enemies3.contains(enemy)){
-      let ship = this.physics.add.sprite(enemy.x, enemy.y, "ship2");
+      let ship = this.physics.add.sprite(enemy.x+2, enemy.y+8, "ship2");
       this.enemies2.add(ship);
       ship.play("ship2_anim");
       ship.setInteractive();
