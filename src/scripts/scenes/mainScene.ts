@@ -12,10 +12,12 @@ export default class MainScene extends Phaser.Scene {
   spacebar: Phaser.Input.Keyboard.Key;
   projectiles: Phaser.GameObjects.Group;
   //powerUps: Phaser.Physics.Arcade.Group;  //No power-ups in galaga
-  enemies: Phaser.Physics.Arcade.Group;
+  enemies1: Phaser.Physics.Arcade.Group;
   scoreLabel: Phaser.GameObjects.BitmapText;
   score: number;
   enemyMovement: any;
+  enemies3: Phaser.Physics.Arcade.Group;
+  enemies2: Phaser.Physics.Arcade.Group;
 
   constructor() {
     super({ key: 'MainScene' });
@@ -41,12 +43,14 @@ export default class MainScene extends Phaser.Scene {
 
     /*******************************************************************************/
 
-    //Set up enemies
-    this.enemies = this.physics.add.group();
+    //Set up enemies - 3 groups of enemies to separate different ships
+    this.enemies1 = this.physics.add.group();
+    this.enemies2 = this.physics.add.group();
+    this.enemies3 = this.physics.add.group();
     let xCounter = 60;
     for(let i = 0; i < 5; i++){
       let ship = this.physics.add.sprite(xCounter, 60, "ship3");
-      this.enemies.add(ship);
+      this.enemies3.add(ship);
       xCounter += 70;
       ship.play("ship3_anim");
       ship.setInteractive();
@@ -55,7 +59,7 @@ export default class MainScene extends Phaser.Scene {
     xCounter = 40;
     for(let i = 0; i < 9; i++){
       let ship = this.physics.add.sprite(xCounter, 120, "ship2");
-      this.enemies.add(ship);
+      this.enemies2.add(ship);
       xCounter += 40;
       ship.play("ship2_anim");
       ship.setInteractive();
@@ -64,15 +68,15 @@ export default class MainScene extends Phaser.Scene {
     for(let i = 0; i < 18; i++){
       let shipA = this.physics.add.sprite(xCounter, 150, "ship1");
       let shipB = this.physics.add.sprite(xCounter, 180, "ship1");
-      this.enemies.add(shipA);
-      this.enemies.add(shipB);
+      this.enemies1.add(shipA);
+      this.enemies1.add(shipB);
       xCounter += 20;
       shipA.play("ship1_anim");
       shipB.play("ship1_anim");
       shipA.setInteractive();
       shipB.setInteractive();
     }
-    this.enemyMovement = 0.20;
+    this.enemyMovement = 0.22;
     
     this.input.on("gamedownobject", this.destroyShip, this);
 
@@ -111,21 +115,41 @@ export default class MainScene extends Phaser.Scene {
       projectile.destroy();
     });
     this.physics.add.overlap(this.player, this.powerUps, this.pickPowerUp, this.giveNull, this);*/
-    this.physics.add.overlap(this.player, this.enemies, this.killPlayer, this.giveNull, this);
-    this.physics.add.overlap(this.projectiles, this.enemies, this.hitEnemy, this.giveNull, this);
+    this.physics.add.overlap(this.player, this.enemies1, this.killPlayer, this.giveNull, this);
+    this.physics.add.overlap(this.projectiles, this.enemies1, this.hitEnemy, this.giveNull, this);
+    this.physics.add.overlap(this.player, this.enemies2, this.killPlayer, this.giveNull, this);
+    this.physics.add.overlap(this.projectiles, this.enemies2, this.hitEnemy, this.giveNull, this);
+    this.physics.add.overlap(this.player, this.enemies3, this.killPlayer, this.giveNull, this);
+    this.physics.add.overlap(this.projectiles, this.enemies3, this.hitEnemy, this.giveNull, this);
+  
   }
 
   update() {
     this.player.setVelocity(0);
 
-    for(let i = 0; i < this.enemies.getChildren().length; i++){
-      this.moveShip(this.enemies.getChildren()[i], this.enemyMovement);
-      let ship = this.getShip(this.enemies.getChildren()[i]);
+    //could use or statement but very long one
+    for(let i = 0; i < this.enemies1.getChildren().length; i++){
+      this.moveShip(this.enemies1.getChildren()[i], this.enemyMovement);
+      let ship = this.getShip(this.enemies1.getChildren()[i]);
       if(ship.y >= this.player.y){
         this.endGame(false);
       }
     }
-
+    for(let i = 0; i < this.enemies2.getChildren().length; i++){
+      this.moveShip(this.enemies2.getChildren()[i], this.enemyMovement);
+      let ship = this.getShip(this.enemies2.getChildren()[i]);
+      if(ship.y >= this.player.y){
+        this.endGame(false);
+      }
+    }
+    for(let i = 0; i < this.enemies3.getChildren().length; i++){
+      this.moveShip(this.enemies3.getChildren()[i], this.enemyMovement);
+      let ship = this.getShip(this.enemies3.getChildren()[i]);
+      if(ship.y >= this.player.y){
+        this.endGame(false);
+      }
+    }
+    
     this.movePlayerManager();
 
     for(var i = 0; i < this.projectiles.getChildren().length; i++){
@@ -133,7 +157,7 @@ export default class MainScene extends Phaser.Scene {
       beam.update(this);
     }
 
-    if(this.score == 750){
+    if(this.score == 690){
       this.endGame(true);
     }
   }
@@ -145,8 +169,24 @@ export default class MainScene extends Phaser.Scene {
   hitEnemy(projectile, enemy){
     let explosion = new Explosion(this, enemy.x, enemy.y);
     projectile.destroy();
-    enemy.destroy();
-    this.score += 15;
+    if(this.enemies3.contains(enemy)){
+      let ship = this.physics.add.sprite(enemy.x, enemy.y, "ship2");
+      this.enemies2.add(ship);
+      ship.play("ship2_anim");
+      ship.setInteractive();
+      enemy.destroy();
+    }
+    else if(this.enemies2.contains(enemy)){
+      let ship = this.physics.add.sprite(enemy.x, enemy.y, "ship1");
+      this.enemies1.add(ship);
+      ship.play("ship1_anim");
+      ship.setInteractive();
+      enemy.destroy();
+    }
+    else{
+      enemy.destroy();
+    }
+    this.score += 10;
     this.scoreLabel.text = "SCORE: " + this.score;
   }
 
