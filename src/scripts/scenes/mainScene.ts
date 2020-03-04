@@ -13,12 +13,13 @@ export default class MainScene extends Phaser.Scene {
   projectiles: Phaser.GameObjects.Group;
   //powerUps: Phaser.Physics.Arcade.Group;  //No power-ups in galaga
   enemies1: Phaser.Physics.Arcade.Group;
-  scoreLabel: Phaser.GameObjects.BitmapText;
-  score: number;
-  enemyMovement: any;
   enemies3: Phaser.Physics.Arcade.Group;
   enemies2: Phaser.Physics.Arcade.Group;
-
+  enemyMovement: number;
+  scoreLabel: Phaser.GameObjects.BitmapText;
+  score: number;
+  timer: any;
+  
   constructor() {
     super({ key: 'MainScene' });
   }
@@ -121,13 +122,13 @@ export default class MainScene extends Phaser.Scene {
     this.physics.add.overlap(this.projectiles, this.enemies2, this.hitEnemy, this.giveNull, this);
     this.physics.add.overlap(this.player, this.enemies3, this.killPlayer, this.giveNull, this);
     this.physics.add.overlap(this.projectiles, this.enemies3, this.hitEnemy, this.giveNull, this);
-  
+
   }
 
   update() {
     this.player.setVelocity(0);
 
-    //could use or statement but very long one
+    //could use 'or' statement but very long one
     for(let i = 0; i < this.enemies1.getChildren().length; i++){
       this.moveShip(this.enemies1.getChildren()[i], this.enemyMovement);
       let ship = this.getShip(this.enemies1.getChildren()[i]);

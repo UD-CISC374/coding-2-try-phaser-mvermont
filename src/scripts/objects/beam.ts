@@ -20,5 +20,4 @@ export default class Beam extends Phaser.GameObjects.Sprite{
         }
     }
 
-
 }
